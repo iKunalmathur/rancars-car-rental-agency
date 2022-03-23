@@ -1,0 +1,1 @@
+<span class="text-3xl font-bold">Ran<span class="text-primary-500">Cars.</span></span>

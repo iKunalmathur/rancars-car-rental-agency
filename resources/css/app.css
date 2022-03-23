@@ -1,0 +1,20 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+html {
+    scroll-behavior: smooth;
+}
+
+@layer components {
+    .text-muted {
+        @apply text-gray-500;
+    }
+    .max-w-container {
+        @apply max-w-4xl mx-auto px-4;
+    }
+
+    .site-link {
+        @apply hover:underline;
+    }
+}
