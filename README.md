@@ -28,7 +28,7 @@
     -   [x] rent per day
     -   [x] Capture start date
     -   [x] Capture input as dropdown for the number of days the customer need to rent the car
-    -   [ ] This inputs only be shown when the customer is logged in
+    -   [x] This inputs only be shown when the customer is logged in
     -   [x] ‘Rent Car’ button (Book Now)
 -   [x] This page should be accessible to everyone, irrespective of whether the user is logged in or not. Expected functionality on click of the ‘Rent Car’ button-
 -   [x] Only customers should be able to book the available car by clicking the ‘Rent Car’ button.
