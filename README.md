@@ -89,5 +89,6 @@ $ php artisan serve
 
 | Account type |        Email         | Password |
 | :----------: | :------------------: | :------: |
+| Admin |  admin@example.com   | password |
 | Owner/Agency |  owner@example.com   | password |
 |   Customer   | customer@example.com | password |
