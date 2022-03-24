@@ -25,7 +25,8 @@ class Car extends Model
     }
 
     // Supporting Methods
-    public function isBooked()
+    public function imagePath()
     {
+        return asset("/storage/" . $this->image);
     }
 }

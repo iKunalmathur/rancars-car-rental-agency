@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Owner;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class CarController extends Controller
@@ -47,8 +48,14 @@ class CarController extends Controller
             "plate_number" => ["required", Rule::unique("cars", "plate_number")],
         ]);
 
+        // save image
+        if ($request->hasFile("image")) {
+            $imagePath = $request->file('image')->store("/cars", "public");
+        }
+
         Car::create([
             "owner_id" => auth()->id(),
+            "image" => $imagePath ?? "",
             "name" => $request->name,
             "rent" => $request->rent,
             "model" => $request->model,
@@ -102,8 +109,15 @@ class CarController extends Controller
             "plate_number" => ["required", Rule::unique("cars", "plate_number")->ignore($car)],
         ]);
 
+        // save image
+        if ($request->hasFile("image")) {
+            if ($car->image) Storage::disk("public")->delete($car->image);
+            $imagePath = $request->file('image')->store("/cars", "public");
+        }
+
         $car->update([
             "name" => $request->name,
+            "image" => $imagePath ?? $car->image,
             "rent" => $request->rent,
             "model" => $request->model,
             "seating_capacity" => $request->seating_capacity,

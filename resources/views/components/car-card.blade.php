@@ -3,8 +3,8 @@
 <div class="bg-white shadow-md p-6 rounded-lg border mt-8">
     <div class="grid grid-cols-1 sm:grid-cols-12 gap-4">
         <div class="sm:col-span-4 ">
-            <img class="w-full h-[150px] object-cover" src="{{$car->image ?? 'https://via.placeholder.com/300x210'}}"
-                alt="car">
+            <img class="w-full h-[150px] object-cover"
+                src="{{$car->image ? $car->imagePath() : 'https://via.placeholder.com/300x210'}}" alt="car">
         </div>
         <div class="sm:col-span-8 flex flex-col justify-between gap-2">
             <div class="space-y-3">

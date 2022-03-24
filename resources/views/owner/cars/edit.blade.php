@@ -10,9 +10,12 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <form class="grid grid-cols-1 md:grid-cols-12 gap-8" action="{{ route('owner.cars.update',$car) }}"
-                        method="post">
+                        method="post" enctype="multipart/form-data">
                         @csrf
                         @method("put")
+                        <div class="space-y-2 md:col-span-6">
+                            @livewire('image-input', ['image' => $car->image ? $car->imagePath() : null], key($car->id))
+                        </div>
                         <div class="space-y-2 md:col-span-6">
                             <x-label>Name</x-label>
                             <x-input type="text" name="name" value="{{ $car->name }}" />
