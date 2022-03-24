@@ -49,7 +49,7 @@
         </main>
     </div>
     {{-- livewire script --}}
-    @livewireScriptss
+    @livewireScripts
 </body>
 
 </html>

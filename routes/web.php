@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/* Global Routes */
+/* Open Routes */
 
 Route::get('/', [\App\Http\Controllers\WelcomeController::class, "index"]);
 
-
+// Auth only routes
 Route::get('/dashboard', function () {
     switch (auth()->user()->role_id) {
         case Role::IS_OWNER:
@@ -35,6 +35,16 @@ Route::get('/dashboard', function () {
     }
 })->middleware(['auth'])->name('dashboard');
 
+// Auth only routes
+Route::group(["middleware" => ["auth"], "as" => "auth."], function () {
+    // Account Routes
+    Route::controller(\App\Http\Controllers\Auth\AccountController::class)->group(function () {
+        Route::get("/account", "index")->name("account");
+        Route::put("/account/details", "details")->name("account.details");
+        Route::put("/account/password", "password")->name("account.password");
+    });
+});
+
 /* Owner/Agency Routes */
 Route::group(["prefix" => "owner", "as" => "owner."], function () {
 
@@ -49,6 +59,7 @@ Route::group(["prefix" => "owner", "as" => "owner."], function () {
         Route::post('/register', 'store');
     });
 
+    // Auth routes
     Route::group(["middleware" => ["auth", "isOwner"]], function () {
         Route::resource('cars', \App\Http\Controllers\Owner\CarController::class);
         Route::resource('bookings', \App\Http\Controllers\Owner\BookingController::class);

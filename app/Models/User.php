@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'image',
         'role_id'
     ];
 
@@ -66,5 +67,11 @@ class User extends Authenticatable
                 return null;
                 break;
         }
+    }
+
+    // Supporting Methods
+    public function imagePath()
+    {
+        return asset("/storage/" . $this->image);
     }
 }

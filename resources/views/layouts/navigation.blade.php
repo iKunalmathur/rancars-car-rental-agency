@@ -65,9 +65,24 @@
 
                     <x-slot name="content">
                         <!-- Authentication -->
+                        @switch(auth()->user()->role_id)
+                        {{-- IS_OWNER --}}
+                        @case(\App\Models\Role::IS_OWNER)
+                        <x-dropdown-link :href="route('auth.account')">
+                            {{ __('Account') }}
+                        </x-dropdown-link>
+                        @break
+                        {{-- IS_CUSTOMER --}}
+                        @case(\App\Models\Role::IS_CUSTOMER)
+                        <x-dropdown-link :href="route('auth.account')">
+                            {{ __('Account') }}
+                        </x-dropdown-link>
+                        @break
+                        @default
+                        @endswitch
+
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-
                             <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
