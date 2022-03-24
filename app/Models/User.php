@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -45,9 +46,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $appends = [
+        "profile_photo_url"
+    ];
 
     // Relations
 
+    public function role()
+    {
+        return $this->belongsTo(Role::class, "role_id");
+    }
     public function cars()
     {
         return $this->hasMany(Car::class, "owner_id");
@@ -73,5 +81,20 @@ class User extends Authenticatable
     public function imagePath()
     {
         return asset("/storage/" . $this->image);
+    }
+
+    public function getProfilePhotoUrlAttribute()
+    {
+        return $this->image
+            ? asset("/storage/" . $this->image)
+            : $this->defaultProfilePhotoUrl();
+    }
+
+    protected function defaultProfilePhotoUrl()
+    {
+        $name = trim(collect(explode(' ', $this->name))->map(function ($segment) {
+            return mb_substr($segment, 0, 1);
+        })->join(' '));
+        return 'https://ui-avatars.com/api/?name=' . urlencode($name) . '&color=7F9CF5&background=EBF4FF';
     }
 }

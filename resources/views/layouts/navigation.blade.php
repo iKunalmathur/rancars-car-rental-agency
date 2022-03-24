@@ -17,6 +17,24 @@
                 </div>
 
                 @switch(auth()->user()->role_id)
+                {{-- IS_ADMIN --}}
+                @case(\App\Models\Role::IS_ADMIN)
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                        {{ __('users') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('admin.cars.index')" :active="request()->routeIs('admin.cars.*')">
+                        {{ __('cars') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('admin.bookings.index')" :active="request()->routeIs('admin.bookings.*')">
+                        {{ __('bookings') }}
+                    </x-nav-link>
+                </div>
+                @break
                 {{-- IS_OWNER --}}
                 @case(\App\Models\Role::IS_OWNER)
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -49,7 +67,9 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
-                            class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                            class="flex gap-2 items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                            <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}"
+                                alt="{{ Auth::user()->name }}" />
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="ml-1">
@@ -66,6 +86,12 @@
                     <x-slot name="content">
                         <!-- Authentication -->
                         @switch(auth()->user()->role_id)
+                        {{-- IS_ADMIN --}}
+                        @case(\App\Models\Role::IS_ADMIN)
+                        <x-dropdown-link :href="route('auth.account')">
+                            {{ __('Account') }}
+                        </x-dropdown-link>
+                        @break
                         {{-- IS_OWNER --}}
                         @case(\App\Models\Role::IS_OWNER)
                         <x-dropdown-link :href="route('auth.account')">
@@ -138,16 +164,22 @@
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+            <div class="flex items-center px-4">
+                <div class="shrink-0 mr-3">
+                    <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}"
+                        alt="{{ Auth::user()->name }}" />
+                </div>
+
+                <div>
+                    <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
+                    <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                </div>
             </div>
 
             <div class="mt-3 space-y-1">
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-
                     <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}

@@ -21,6 +21,9 @@ Route::get('/', [\App\Http\Controllers\WelcomeController::class, "index"]);
 // Auth only routes
 Route::get('/dashboard', function () {
     switch (auth()->user()->role_id) {
+        case Role::IS_ADMIN:
+            return redirect()->route('admin.dashboard');
+            break;
         case Role::IS_OWNER:
             return view("owner.dashboard");
             break;
@@ -42,6 +45,19 @@ Route::group(["middleware" => ["auth"], "as" => "auth."], function () {
         Route::get("/account", "index")->name("account");
         Route::put("/account/details", "details")->name("account.details");
         Route::put("/account/password", "password")->name("account.password");
+    });
+});
+
+/* Admin Routes */
+Route::group(["prefix" => "admin", "as" => "admin."], function () {
+    Route::get("/dashboard", \App\Http\Controllers\Admin\DashboardController::class)->name('dashboard');
+
+    // Auth routes
+    Route::group(["middleware" => ["auth", "isAdmin"]], function () {
+        Route::resource('cars', \App\Http\Controllers\Admin\CarController::class);
+        Route::resource('bookings', \App\Http\Controllers\Admin\BookingController::class);
+        Route::put('users/update/password', [\App\Http\Controllers\Admin\UserController::class, "password"])->name('users.update.password');
+        Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
     });
 });
 
