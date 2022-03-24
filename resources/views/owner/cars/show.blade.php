@@ -1,24 +1,29 @@
-<x-guest-layout>
-    <div class="flex flex-col justify-between min-h-screen max-w-container">
-        <x-header />
-        <main class="">
-            <section class="">
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight capitalize">
+            {{ __('cars / show') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-4">
+            <div class="overflow-hidden p-6">
                 {{-- Car Details --}}
-                <x-car-card :car="$car" type="owner" />
-                <div class="bg-white shadow-md p-6 rounded-lg space-y-2 border mt-8">
-                    <h1 class="text-xl font-semibold border-b-2 mb-4 pb-6">Booking History : </h1>
+                <h1 class="text-xl font-semibold">Car Details : </h1>
+                <x-car-card :car="$car" type="admin" />
+            </div>
+            <div class="overflow-hidden p-6">
+                {{-- Booking History --}}
+                <h1 class="text-xl font-semibold">Booking History : </h1>
+                <div class="grid gap-4 sm:grid-cols-3 mt-8">
                     @forelse ($car->bookings as $booking)
-                    <div class="border-b-2 mb-4 py-4">
-                        <h2 class="">Name: {{$booking->buyer->name}}</h2>
-                        <p>Email : {{$booking->buyer->email}}</p>
-                        <p>Rent : ₹ {{$booking->rent}} / per day</p>
-                    </div>
+                    <x-booking-card :booking="$booking" />
                     @empty
-                    <h2 class="text-muted">Not Booked yet</h2>
-                    @endforelse
                 </div>
-            </section>
-        </main>
-        <x-footer />
+                <h2 class="text-muted">Not Booked yet</h2>
+                @endforelse
+            </div>
+
+        </div>
     </div>
-</x-guest-layout>
+</x-app-layout>

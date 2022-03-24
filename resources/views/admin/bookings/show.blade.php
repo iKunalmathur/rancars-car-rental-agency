@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight capitalize">
-            {{ __('cars / show') }}
+            {{ __('booking / show') }}
         </h2>
     </x-slot>
 
@@ -14,16 +14,11 @@
             </div>
             <div class="overflow-hidden p-6">
                 {{-- Booking History --}}
-                <h1 class="text-xl font-semibold">Booking History : </h1>
+                <h1 class="text-xl font-semibold">Booking Details : </h1>
                 <div class="grid gap-4 sm:grid-cols-3 mt-8">
-                    @forelse ($car->bookings as $booking)
                     <x-booking-card :booking="$booking" />
-                    @empty
                 </div>
-                <h2 class="text-muted">Not Booked yet</h2>
-                @endforelse
             </div>
-
         </div>
     </div>
 </x-app-layout>

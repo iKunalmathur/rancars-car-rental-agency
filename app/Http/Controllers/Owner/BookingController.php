@@ -72,7 +72,10 @@ class BookingController extends Controller
      */
     public function show(Booking $booking)
     {
-        //
+        return view("owner.bookings.show", [
+            "booking" => $booking,
+            "car" => $booking->car
+        ]);
     }
 
     /**

@@ -38,13 +38,11 @@
                         </div>
                         <div class="space-y-2 md:col-span-6">
                             <x-label>start_date</x-label>
-                            <x-input type="datetime-local" name="start_date"
-                                value="{{$booking->getRawOriginal('start_date')}}" />
+                            <x-input type="date" name="start_date" value="{{$booking->start_date}}" />
                         </div>
                         <div class="space-y-2 md:col-span-6">
                             <x-label>end_date</x-label>
-                            <x-input type="datetime-local" step=0 min=0 name="end_date"
-                                value="{{$booking->getRawOriginal('end_date')}}" />
+                            <x-input type="date" step=0 min=0 name="end_date" value="{{$booking->end_date}}" />
                         </div>
                         <div class="space-y-2 md:col-span-6">
                             <x-label>rent</x-label>

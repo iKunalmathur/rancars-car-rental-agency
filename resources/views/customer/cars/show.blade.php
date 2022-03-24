@@ -14,11 +14,11 @@
                         <x-input type="text" name="car_id" value="{{ $car->id }}" hidden readonly />
                         <div class="space-y-2 md:col-span-6">
                             <x-label>start date</x-label>
-                            <x-input type="datetime-local" name="start_date" value="{{ old('start_date') }}" />
+                            <x-input type="date" name="start_date" value="{{ old('start_date') }}" />
                         </div>
                         <div class="space-y-2 md:col-span-6">
                             <x-label>end date (optional)</x-label>
-                            <x-input type="datetime-local" step=0 min=0 name="end_date" value="{{ old('end_date') }}" />
+                            <x-input type="date" step=0 min=0 name="end_date" value="{{ old('end_date') }}" />
                         </div>
                         <div class="space-y-2 md:col-span-12">
                             <x-label>number of days</x-label>

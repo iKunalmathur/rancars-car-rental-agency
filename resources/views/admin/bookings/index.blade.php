@@ -32,6 +32,9 @@
                                                     Car
                                                 </th>
                                                 <th scope="col" class="text-sm text-gray-900 px-6 py-4 text-left">
+                                                    Owner
+                                                </th>
+                                                <th scope="col" class="text-sm text-gray-900 px-6 py-4 text-left">
                                                     Buyer
                                                 </th>
                                                 <th scope="col" class="text-sm text-gray-900 px-6 py-4 text-left">
@@ -61,6 +64,15 @@
                                                 <td
                                                     class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                     <p>
+                                                        {{ $booking->owner->name}}
+                                                    </p>
+                                                    <p class="text-sm text-gray-500">
+                                                        {{ $booking->owner->email}}
+                                                    </p>
+                                                </td>
+                                                <td
+                                                    class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <p>
                                                         {{ $booking->buyer->name}}
                                                     </p>
                                                     <p class="text-sm text-gray-500">
@@ -81,6 +93,8 @@
                                                 </td>
                                                 <td
                                                     class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap flex gap-4">
+                                                    <a href="{{ route('admin.bookings.show',$booking) }}"
+                                                        class="text-green-500">Show</a>
                                                     <a href="{{ route('admin.bookings.edit',$booking) }}"
                                                         class="text-blue-500">Edit</a>
                                                     <form action="{{ route('admin.bookings.destroy',$booking) }}"

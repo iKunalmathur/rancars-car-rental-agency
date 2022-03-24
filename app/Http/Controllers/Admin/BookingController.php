@@ -75,7 +75,10 @@ class BookingController extends Controller
      */
     public function show(Booking $booking)
     {
-        //
+        return view("admin.bookings.show", [
+            "booking" => $booking,
+            "car" => $booking->car
+        ]);
     }
 
     /**

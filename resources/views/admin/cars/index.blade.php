@@ -29,6 +29,9 @@
                                                     #
                                                 </th>
                                                 <th scope="col" class="text-sm text-gray-900 px-6 py-4 text-left">
+                                                    Owner
+                                                </th>
+                                                <th scope="col" class="text-sm text-gray-900 px-6 py-4 text-left">
                                                     Name
                                                 </th>
                                                 <th scope="col" class="text-sm text-gray-900 px-6 py-4 text-left">
@@ -48,6 +51,15 @@
                                                 class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                                     {{$loop->iteration}}
+                                                </td>
+                                                <td
+                                                    class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <p>
+                                                        {{ $car->owner->name}}
+                                                    </p>
+                                                    <p class="text-sm text-gray-500">
+                                                        {{ $car->owner->email}}
+                                                    </p>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                                     {{$car->name}}

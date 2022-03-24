@@ -15,18 +15,18 @@ class Booking extends Model
 
     public function getCreatedAtAttribute($value)
     {
-        return Carbon::parse($value)->toDayDateTimeString();
+        return Carbon::parse($value)->toFormattedDateString();
     }
     public function getStartDateAttribute($value)
     {
-        return Carbon::parse($value)->toDayDateTimeString();
+        return Carbon::parse($value)->toDateString();
     }
     public function getEndDateAttribute($value)
     {
         if (!$value) {
             return null;
         }
-        return Carbon::parse($value)->toDayDateTimeString();
+        return Carbon::parse($value)->toDateString();
     }
 
     // Relations
@@ -37,5 +37,9 @@ class Booking extends Model
     public function buyer()
     {
         return $this->belongsTo(User::class, "buyer_id");
+    }
+    public function owner()
+    {
+        return $this->belongsTo(User::class, "owner_id");
     }
 }

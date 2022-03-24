@@ -15,13 +15,17 @@ class Car extends Model
 
     public function getCreatedAtAttribute($value)
     {
-        return Carbon::parse($value)->toDayDateTimeString();
+        return Carbon::parse($value)->toFormattedDateString();
     }
 
     //relations
     public function bookings()
     {
         return $this->hasMany(Booking::class);
+    }
+    public function owner()
+    {
+        return $this->belongsTo(User::class);
     }
 
     // Supporting Methods

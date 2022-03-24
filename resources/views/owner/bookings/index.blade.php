@@ -81,6 +81,8 @@
                                                 </td>
                                                 <td
                                                     class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap flex gap-4">
+                                                    <a href="{{ route('owner.bookings.show',$booking) }}"
+                                                        class="text-green-500">Show</a>
                                                     <a href="{{ route('owner.bookings.edit',$booking) }}"
                                                         class="text-blue-500">Edit</a>
                                                     <form action="{{ route('owner.bookings.destroy',$booking) }}"
