@@ -84,6 +84,7 @@ $ php artisan migrate --seed
 ```
 $ php artisan serve
 ```
+Open http://localhost:8000 with your browser to see the result.
 
 # Access Credentials
 
