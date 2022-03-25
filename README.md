@@ -54,7 +54,13 @@ DB_PASSWORD=
 $ php artisan migrate --seed
 ```
 
-### Step 6 - Start Development Server
+### Step 5 - Link Storage
+
+```
+$ php artisan storage:link
+```
+
+### Step 7 - Start Development Server
 
 ```
 $ php artisan serve
