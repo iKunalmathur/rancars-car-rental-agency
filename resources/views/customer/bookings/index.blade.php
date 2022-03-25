@@ -38,6 +38,9 @@
                                                     Rent (Per day)
                                                 </th>
                                                 <th scope="col" class="text-sm  text-gray-900 px-6 py-4 text-left">
+                                                    Vehicle No.
+                                                </th>
+                                                <th scope="col" class="text-sm  text-gray-900 px-6 py-4 text-left">
                                                     Created At
                                                 </th>
                                                 <th scope="col" class="text-sm  text-gray-900 px-6 py-4 text-left">
@@ -55,7 +58,7 @@
                                                 </td>
                                                 <td
                                                     class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                    {{$booking->car->name}}
+                                                    {{$booking?->car->name}}
                                                 </td>
                                                 <td
                                                     class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
@@ -69,6 +72,10 @@
                                                 <td
                                                     class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                     ₹ {{$booking->rent}}
+                                                </td>
+                                                <td
+                                                    class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    {{$booking?->car->plate_number}}
                                                 </td>
                                                 <td
                                                     class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">

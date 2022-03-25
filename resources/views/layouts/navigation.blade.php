@@ -141,6 +141,19 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
             @switch(auth()->user()->role_id)
+            {{-- IS_ADMIN --}}
+            @case(\App\Models\Role::IS_ADMIN)
+            <x-responsive-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                {{ __('users') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.cars.index')" :active="request()->routeIs('admin.cars.*')">
+                {{ __('cars') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.bookings.index')"
+                :active="request()->routeIs('admin.bookings.*')">
+                {{ __('bookings') }}
+            </x-responsive-nav-link>
+            @break
             {{-- IS_OWNER --}}
             @case(\App\Models\Role::IS_OWNER)
             <x-responsive-nav-link :href="route('owner.cars.index')" :active="request()->routeIs('owner.cars.*')">
@@ -180,8 +193,8 @@
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
-                                        this.closest('form').submit();">
+                    <x-responsive-nav-link :href="route('logout')"
+                        onclick="event.preventDefault(); this.closest('form').submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>
